@@ -1,0 +1,23 @@
+server {
+  listen        80;
+  server_name   mydomain.com;
+
+  # TODO: return the correct redirection
+  return        301 https://mydomain.com$request_uri;
+}
+
+server {
+  listen        443;
+  server_name   mydomain.com;
+
+  ssl    on;
+  # TODO: specifiy the right path to cer/key files
+  ssl_certificate         /path/to/cert;
+  ssl_certificate_key     /path/to/key;
+
+  location / {
+    root   /usr/share/nginx/html;
+
+    try_files $uri /index.html;
+  }
+}
