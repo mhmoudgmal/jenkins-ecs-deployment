@@ -2,7 +2,6 @@
     "family": "frontend",
     "containerDefinitions": [
         {
-            // TODO: replace repo with right ecr-repo name.
             "image": "601519473423.dkr.ecr.eu-central-1.amazonaws.com/repo:%BUILD_TAG%",
             "name": "frontend",
             "essential": true,
