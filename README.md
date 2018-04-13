@@ -20,5 +20,3 @@ That was an example built with a react/webpack project, but it can be cusomized 
 ---
 
 - There is a down-time between the `stop-task` step and `update-service` with (desired-count=1). this can be solved if there is two instances behind a loadbalancer and running the `ecs (stop-task/update-service)` one at a time.
-
-- In case there is no more thatn one instance, then `HAProxy` might help?

@@ -5,10 +5,9 @@ node {
       stage("BUILD STARTED") {
         slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
       }
-      
-      final String EDGE        = "edge"
+
       final String STAGING     = "staging"
-      final String PRODUCTION  = "edge"
+      final String PRODUCTION  = "production"
 
       def wepackCfg
       def imageTag
@@ -19,16 +18,9 @@ node {
 
       // FIXME: please provide the corresponding values of the environment.
       // Also, this is ok if you have a fixed deployment environments, otherwis..
-      // this should be refactored to be more flexible, scalable and easy configurable, 
+      // this should be refactored to be more flexible, scalable and easy configurable,
       // and to apply the OCP, avoid opening this code later.
-      if (env.BRANCH_NAME == "edge") {
-        wepackCfg         = ""
-        imageTag          = ""
-        serviceName       = ""
-        taskFamily        = ""
-        dockerFilePrefix  = EDGE
-        clusterName       = ""
-      } else if  (env.BRANCH_NAME == "staging") {
+      if  (env.BRANCH_NAME == "staging") {
         wepackCfg         = ""
         imageTag          = ""
         serviceName       = ""
@@ -47,7 +39,7 @@ node {
       def remoteImageTag  = "${imageTag}-${BUILD_NUMBER}"
 
       def taskDefile      = "file://aws/task-definition-${remoteImageTag}.json"
-      def ecRegistry      = "https://601519473423.dkr.ecr.eu-central-1.amazonaws.com"
+      def ecRegistry      = "https://%ACCOUNT%.dkr.ecr.eu-central-1.amazonaws.com"
 
       /*
       / node-7.0.0 is a tag name for nodejd tool installation in Jenkins server,
@@ -67,7 +59,7 @@ node {
       stage("Project Build") {
         // TODO: specify how you would build your project
         //
-        // @example --------------------------- 
+        // @example ---------------------------
         // sh "rm -rf ./node_modules/*"
         // sh "npm install"
         // sh "npm install -g webpack"

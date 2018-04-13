@@ -2,7 +2,7 @@
     "family": "frontend",
     "containerDefinitions": [
         {
-            "image": "601519473423.dkr.ecr.eu-central-1.amazonaws.com/repo:%BUILD_TAG%",
+            "image": "%ACCOUNT%.dkr.ecr.eu-central-1.amazonaws.com/%REPO%:%BUILD_TAG%",
             "name": "frontend",
             "essential": true,
             "cpu": 100,
