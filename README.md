@@ -14,9 +14,3 @@ That was an example built with a react/webpack project, but it can be cusomized 
 - Search for TODOs and followup replacing to mtach the project needs.
 
 - Depends on the project the docker files, and nginx configs might have different setup.
-
-
-### Challenges with this setup
----
-
-- There is a down-time between the `stop-task` step and `update-service` with (desired-count=1). this can be solved if there is two instances behind a loadbalancer and running the `ecs (stop-task/update-service)` one at a time.
